@@ -1,4 +1,8 @@
 <script setup>
+import { computed } from 'vue'
+import { useRoute } from 'vue-router'
+import { isWorkbenchEntryActive } from '../../router/workbench.config'
+
 defineProps({
   title: {
     type: String,
@@ -13,6 +17,11 @@ defineProps({
     required: true,
   },
 })
+
+const route = useRoute()
+
+// 当前页判断统一由导航配置提供，刷新或直接访问时高亮结果一致。
+const currentPath = computed(() => route.path)
 </script>
 
 <template>
@@ -27,6 +36,7 @@ defineProps({
         :key="item.to"
         :to="item.to"
         class="nav-link"
+        :class="{ 'nav-link-active': isWorkbenchEntryActive(item, currentPath) }"
       >
         {{ item.label }}
       </RouterLink>
@@ -73,7 +83,7 @@ defineProps({
   background: rgba(255, 255, 255, 0.72);
 }
 
-.nav-link.router-link-active {
+.nav-link.nav-link-active {
   background: #5d4322;
   color: #fff8eb;
 }

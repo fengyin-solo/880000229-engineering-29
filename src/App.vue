@@ -2,7 +2,7 @@
 import { RouterView } from 'vue-router'
 import AppHeader from './components/common/AppHeader.vue'
 import AppSidebar from './components/common/AppSidebar.vue'
-import { restorationNavigation } from './data/restorationData'
+import { workbenchNavItems } from './router/workbench.config'
 </script>
 
 <template>
@@ -10,7 +10,7 @@ import { restorationNavigation } from './data/restorationData'
     <AppSidebar
       title="Conservation Desk"
       subtitle="古籍虫蛀修复"
-      :items="restorationNavigation"
+      :items="workbenchNavItems"
     />
     <div class="app-main">
       <AppHeader
