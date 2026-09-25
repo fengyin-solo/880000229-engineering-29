@@ -1,30 +1,17 @@
 import { createRouter, createWebHistory } from 'vue-router'
 
-import DashboardView from '../views/DashboardView.vue'
-import BatchLibraryView from '../views/BatchLibraryView.vue'
-import TaskBoardView from '../views/TaskBoardView.vue'
+import {
+  entryRouteRecords,
+  fallbackRouteRecord,
+} from '../config/navigation.js'
+import { assertNavigationConfig } from './navigationValidation.js'
 
-const routes = [
-  {
-    path: '/',
-    name: 'dashboard',
-    component: DashboardView,
-  },
-  {
-    path: '/batches',
-    name: 'batches',
-    component: BatchLibraryView,
-  },
-  {
-    path: '/tasks',
-    name: 'tasks',
-    component: TaskBoardView,
-  },
-]
+// 浏览器启动时先做同步结构校验：入口缺失、重复路径/名称会在此明确抛出。
+assertNavigationConfig()
 
 const router = createRouter({
   history: createWebHistory(),
-  routes,
+  routes: [...entryRouteRecords, fallbackRouteRecord],
   scrollBehavior() {
     return { top: 0 }
   },

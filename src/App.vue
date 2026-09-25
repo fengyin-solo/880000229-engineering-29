@@ -1,8 +1,12 @@
 <script setup>
-import { RouterView } from 'vue-router'
+import { computed } from 'vue'
+import { RouterView, useRoute } from 'vue-router'
 import AppHeader from './components/common/AppHeader.vue'
 import AppSidebar from './components/common/AppSidebar.vue'
-import { restorationNavigation } from './data/restorationData'
+import { getNavigationItems } from './config/navigation.js'
+
+const route = useRoute()
+const navigationItems = computed(() => getNavigationItems(route.name))
 </script>
 
 <template>
@@ -10,7 +14,7 @@ import { restorationNavigation } from './data/restorationData'
     <AppSidebar
       title="Conservation Desk"
       subtitle="古籍虫蛀修复"
-      :items="restorationNavigation"
+      :items="navigationItems"
     />
     <div class="app-main">
       <AppHeader

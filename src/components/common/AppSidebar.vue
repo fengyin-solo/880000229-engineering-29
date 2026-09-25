@@ -27,6 +27,7 @@ defineProps({
         :key="item.to"
         :to="item.to"
         class="nav-link"
+        :class="{ 'nav-link-active': item.active }"
       >
         {{ item.label }}
       </RouterLink>
@@ -73,7 +74,7 @@ defineProps({
   background: rgba(255, 255, 255, 0.72);
 }
 
-.nav-link.router-link-active {
+.nav-link.nav-link-active {
   background: #5d4322;
   color: #fff8eb;
 }
